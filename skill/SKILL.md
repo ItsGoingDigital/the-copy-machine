@@ -83,6 +83,7 @@ Ask: **"What are you writing copy for?"**
 | Social post | `channels/social.md` |
 | Ad copy | `channels/ad-copy.md` |
 | Sales page | `channels/sales-page.md` |
+| Cold outreach | `channels/cold-outreach.md` |
 
 ### Question 4 — "Tell me about your product" (GENERATE mode only)
 
@@ -399,6 +400,7 @@ When the user makes their selections, load these files:
 - `channels/social.md` — 50-500 characters
 - `channels/ad-copy.md` — Headline + description
 - `channels/sales-page.md` — Long-form, 1500-4000 words
+- `channels/cold-outreach.md` — Personalized, 50-150 words
 
 ---
 
@@ -434,6 +436,7 @@ When the user makes their selections, load these files:
 - Social post
 - Ad copy
 - Sales page
+- Cold outreach
 
 **User:** Landing page
 
