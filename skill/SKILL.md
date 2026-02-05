@@ -67,6 +67,7 @@ Ask: **"What should your copy do?"**
 | Build urgency step by step | `frameworks/build-urgency.md` |
 | Lead with what they get | `frameworks/lead-with-value.md` |
 | Paint the dream, then prove it | `frameworks/dream-then-prove.md` |
+| Educate then sell | `frameworks/awareness-to-action.md` |
 
 ### Question 3 — "What are you building?" (GENERATE mode only)
 
@@ -377,6 +378,7 @@ When the user makes their selections, load these files:
 - `frameworks/build-urgency.md` — AIDA structure
 - `frameworks/lead-with-value.md` — FAB structure
 - `frameworks/dream-then-prove.md` — 4Ps structure
+- `frameworks/awareness-to-action.md` — ACCA structure
 
 **Tones:**
 - `tones/clean-confident.md` — Apple voice
@@ -413,6 +415,7 @@ When the user makes their selections, load these files:
 - Build urgency step by step
 - Lead with what they get
 - Paint the dream, then prove it
+- Educate then sell
 
 **User:** Make them feel the pain
 
@@ -452,6 +455,7 @@ What vibe fits your brand?
 - Build urgency step by step
 - Lead with what they get
 - Paint the dream, then prove it
+- Educate then sell
 
 **User:** Lead with what they get
 
