@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — The Copy Machine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1A1612;
+            --ink-secondary: #4A453D;
+            --ink-tertiary: #7A746A;
+            --paper: #F8F5F0;
+            --paper-aged: #F0EBE3;
+            --paper-bright: #FFFEFA;
+            --rule-light: #D4CFC5;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 48rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .header-inner {
+            max-width: 48rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--ink-secondary);
+        }
+
+        .back-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--ink-secondary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--ink);
+            text-decoration: underline;
+        }
+
+        /* Page Content */
+        .page-header {
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--rule-light);
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--ink-secondary);
+            max-width: 36ch;
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--ink-secondary);
+            line-height: 1.75;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--paper-bright);
+            border: 2px solid var(--ink);
+            margin: 2rem 0;
+            min-height: 500px;
+        }
+
+        .form-container iframe {
+            width: 100%;
+            border: none;
+        }
+
+        /* Response Times */
+        .response-info {
+            background: var(--paper-aged);
+            border: 2px solid var(--ink);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .response-info-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+        }
+
+        .response-info p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .response-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--ink-tertiary);
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .footer-links {
+            margin-top: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--ink-tertiary);
+            text-decoration: none;
+            margin: 0 0.75rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--ink);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="logo">The Copy Machine</a>
+            <a href="/" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Contact</h1>
+            <p class="page-subtitle">Questions, support, or just want to say hi.</p>
+        </div>
+
+        <div class="content">
+            <p>Have a question about The Copy Machine? Need help with something? Use the form below and we'll get back to you.</p>
+
+            <div class="form-container">
+                <!-- Replace FORM_ID with your actual Tally form ID -->
+                <iframe
+                    data-tally-src="https://tally.so/embed/FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="500"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Contact Form">
+                </iframe>
+                <script>
+                    var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s)}
+                </script>
+            </div>
+
+            <div class="response-info">
+                <p class="response-info-title">Response Times</p>
+                <p><strong>General questions:</strong> Within 48 hours</p>
+                <p><strong>Purchase/delivery issues:</strong> Within 24 hours</p>
+                <p><strong>Weekends/holidays:</strong> Next business day</p>
+            </div>
+
+            <p>For purchase-related inquiries, please include your order number or the email address you used to purchase.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>The Copy Machine</p>
+        <div class="footer-links">
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/refund/">Refunds</a>
+            <a href="/contact/">Contact</a>
+        </div>
+    </footer>
+</body>
+</html>
