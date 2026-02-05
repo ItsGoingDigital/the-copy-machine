@@ -55,6 +55,9 @@ Ask: **"What vibe fits your brand?"**
 | Weird and unhinged | `tones/weird-unhinged.md` |
 | Warm and mission-driven | `tones/warm-mission-driven.md` |
 | Witty and self-aware | `tones/witty-self-aware.md` |
+| Friendly and helpful | `tones/friendly-helpful.md` |
+| Playful and human | `tones/playful-human.md` |
+| Technical and precise | `tones/technical-precise.md` |
 
 ### Question 2 — "What should your copy do?"
 
@@ -67,6 +70,7 @@ Ask: **"What should your copy do?"**
 | Build urgency step by step | `frameworks/build-urgency.md` |
 | Lead with what they get | `frameworks/lead-with-value.md` |
 | Paint the dream, then prove it | `frameworks/dream-then-prove.md` |
+| Educate then sell | `frameworks/awareness-to-action.md` |
 
 ### Question 3 — "What are you building?" (GENERATE mode only)
 
@@ -79,6 +83,7 @@ Ask: **"What are you writing copy for?"**
 | Social post | `channels/social.md` |
 | Ad copy | `channels/ad-copy.md` |
 | Sales page | `channels/sales-page.md` |
+| Cold outreach | `channels/cold-outreach.md` |
 
 ### Question 4 — "Tell me about your product" (GENERATE mode only)
 
@@ -377,6 +382,7 @@ When the user makes their selections, load these files:
 - `frameworks/build-urgency.md` — AIDA structure
 - `frameworks/lead-with-value.md` — FAB structure
 - `frameworks/dream-then-prove.md` — 4Ps structure
+- `frameworks/awareness-to-action.md` — ACCA structure
 
 **Tones:**
 - `tones/clean-confident.md` — Apple voice
@@ -384,6 +390,9 @@ When the user makes their selections, load these files:
 - `tones/weird-unhinged.md` — Liquid Death voice
 - `tones/warm-mission-driven.md` — Patagonia voice
 - `tones/witty-self-aware.md` — Oatly voice
+- `tones/friendly-helpful.md` — Mailchimp voice
+- `tones/playful-human.md` — Innocent voice
+- `tones/technical-precise.md` — Stripe voice
 
 **Channels:**
 - `channels/landing-page.md` — Scroll-based, 500-1500 words
@@ -391,6 +400,7 @@ When the user makes their selections, load these files:
 - `channels/social.md` — 50-500 characters
 - `channels/ad-copy.md` — Headline + description
 - `channels/sales-page.md` — Long-form, 1500-4000 words
+- `channels/cold-outreach.md` — Personalized, 50-150 words
 
 ---
 
@@ -404,6 +414,9 @@ When the user makes their selections, load these files:
 - Weird and unhinged
 - Warm and mission-driven
 - Witty and self-aware
+- Friendly and helpful
+- Playful and human
+- Technical and precise
 
 **User:** Witty and self-aware
 
@@ -413,6 +426,7 @@ When the user makes their selections, load these files:
 - Build urgency step by step
 - Lead with what they get
 - Paint the dream, then prove it
+- Educate then sell
 
 **User:** Make them feel the pain
 
@@ -422,6 +436,7 @@ When the user makes their selections, load these files:
 - Social post
 - Ad copy
 - Sales page
+- Cold outreach
 
 **User:** Landing page
 
@@ -443,6 +458,9 @@ What vibe fits your brand?
 - Weird and unhinged
 - Warm and mission-driven
 - Witty and self-aware
+- Friendly and helpful
+- Playful and human
+- Technical and precise
 
 **User:** Clean and confident
 
@@ -452,6 +470,7 @@ What vibe fits your brand?
 - Build urgency step by step
 - Lead with what they get
 - Paint the dream, then prove it
+- Educate then sell
 
 **User:** Lead with what they get
 
