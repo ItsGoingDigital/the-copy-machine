@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial Machine — Design System Specification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           EDITORIAL MACHINE DESIGN TOKENS
+           ============================================ */
+        :root {
+            /* Ink System — Warm blacks for editorial weight */
+            --ink: #1A1612;
+            --ink-secondary: #4A453D;
+            --ink-tertiary: #7A746A;
+            --ink-muted: #A8A197;
+
+            /* Paper System — True newsprint warmth */
+            --paper: #F8F5F0;
+            --paper-aged: #F0EBE3;
+            --paper-stock: #E8E2D6;
+            --paper-bright: #FFFEFA;
+
+            /* Rules & Borders — Editorial weight */
+            --rule: #1A1612;
+            --rule-light: #D4CFC5;
+            --rule-hairline: #E5E0D6;
+
+            /* Signal — Functional only */
+            --signal-error: #9B2C2C;
+            --signal-success: #276749;
+            --signal-caution: #975A16;
+
+            /* Display Type Scale — Confident, headline-forward */
+            --display-2xl: clamp(3.5rem, 8vw, 6rem);
+            --display-xl: clamp(2.75rem, 6vw, 4.5rem);
+            --display-lg: clamp(2rem, 4vw, 3rem);
+            --display-md: clamp(1.5rem, 3vw, 2.25rem);
+            --display-sm: clamp(1.25rem, 2.5vw, 1.75rem);
+
+            /* Body Type Scale */
+            --text-lg: 1.125rem;
+            --text-base: 1rem;
+            --text-sm: 0.875rem;
+            --text-xs: 0.75rem;
+
+            /* Spacing — Editorial rhythm */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --space-32: 8rem;
+
+            /* Layout */
+            --measure: 38rem;
+            --measure-wide: 52rem;
+            --page-max: 72rem;
+
+            /* Rules */
+            --rule-weight-hairline: 1px;
+            --rule-weight-light: 2px;
+            --rule-weight-medium: 3px;
+            --rule-weight-heavy: 4px;
+            --rule-weight-black: 6px;
+        }
+
+        /* ============================================
+           BASE
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: var(--text-base);
+            line-height: 1.7;
+            color: var(--ink);
+            background: var(--paper);
+        }
+
+        /* ============================================
+           DOCUMENT STRUCTURE
+           ============================================ */
+        .document {
+            max-width: var(--page-max);
+            margin: 0 auto;
+            padding: var(--space-24) var(--space-8);
+        }
+
+        /* Masthead */
+        .masthead {
+            text-align: center;
+            padding-bottom: var(--space-16);
+            margin-bottom: var(--space-16);
+            border-bottom: var(--rule-weight-black) solid var(--ink);
+        }
+
+        .masthead::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: var(--rule-weight-hairline);
+            background: var(--ink);
+            margin-bottom: var(--space-6);
+        }
+
+        .masthead-kicker {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ink-tertiary);
+            margin-bottom: var(--space-4);
+        }
+
+        .masthead-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-2xl);
+            font-weight: 900;
+            font-style: normal;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: var(--space-6);
+        }
+
+        .masthead-rule {
+            width: 4rem;
+            height: var(--rule-weight-medium);
+            background: var(--ink);
+            margin: 0 auto var(--space-6);
+        }
+
+        .masthead-subtitle {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-sm);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--ink-secondary);
+            max-width: 32ch;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: var(--space-24);
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-6);
+            align-items: end;
+            padding-bottom: var(--space-4);
+            margin-bottom: var(--space-8);
+            border-bottom: var(--rule-weight-heavy) solid var(--ink);
+        }
+
+        .section-number {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-md);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .section-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-md);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--ink);
+        }
+
+        .section-body {
+            display: grid;
+            gap: var(--space-12);
+        }
+
+        /* Subsection */
+        .subsection {
+            display: grid;
+            grid-template-columns: 12rem 1fr;
+            gap: var(--space-8);
+            padding-bottom: var(--space-8);
+            border-bottom: var(--rule-weight-hairline) solid var(--rule-light);
+        }
+
+        .subsection:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .subsection-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .subsection-content {
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--ink-secondary);
+        }
+
+        .subsection-content p {
+            margin-bottom: var(--space-4);
+            max-width: var(--measure);
+        }
+
+        .subsection-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection-content strong {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* Lead paragraph */
+        .lead {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--text-lg);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--ink);
+            max-width: var(--measure);
+        }
+
+        /* Rule Lists */
+        .rules {
+            list-style: none;
+            margin: var(--space-4) 0 0 0;
+        }
+
+        .rules li {
+            position: relative;
+            padding: var(--space-3) 0 var(--space-3) var(--space-6);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--ink-secondary);
+            border-bottom: var(--rule-weight-hairline) solid var(--rule-hairline);
+        }
+
+        .rules li:last-child {
+            border-bottom: none;
+        }
+
+        .rules li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* Spec Tables */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--text-sm);
+            margin: var(--space-6) 0;
+        }
+
+        .spec-table th {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            background: var(--ink);
+            color: var(--paper);
+            border: none;
+        }
+
+        .spec-table td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: var(--rule-weight-hairline) solid var(--rule-light);
+            color: var(--ink-secondary);
+        }
+
+        .spec-table tbody tr:hover {
+            background: var(--paper-aged);
+        }
+
+        .spec-table code {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: var(--text-xs);
+            padding: 2px 6px;
+            background: var(--paper-stock);
+            border-radius: 2px;
+            color: var(--ink);
+        }
+
+        /* Color Swatches */
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+
+        .swatch {
+            border: var(--rule-weight-light) solid var(--ink);
+        }
+
+        .swatch-color {
+            height: 80px;
+        }
+
+        .swatch-info {
+            padding: var(--space-3);
+            background: var(--paper-bright);
+            border-top: var(--rule-weight-hairline) solid var(--ink);
+        }
+
+        .swatch-name {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-1);
+        }
+
+        .swatch-value {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+        }
+
+        /* Typography Specimens */
+        .type-specimen {
+            padding: var(--space-8);
+            background: var(--paper-bright);
+            border: var(--rule-weight-light) solid var(--ink);
+            margin: var(--space-4) 0;
+        }
+
+        .type-specimen-label {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-tertiary);
+            margin-bottom: var(--space-3);
+            padding-bottom: var(--space-2);
+            border-bottom: var(--rule-weight-hairline) solid var(--rule-light);
+        }
+
+        .type-specimen-sample {
+            color: var(--ink);
+        }
+
+        /* Specimen: Display */
+        .specimen-display {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        /* Component Examples */
+        .example-container {
+            padding: var(--space-8);
+            background: var(--paper-aged);
+            border: var(--rule-weight-light) solid var(--ink);
+            margin: var(--space-6) 0;
+        }
+
+        .example-label {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-tertiary);
+            margin-bottom: var(--space-4);
+        }
+
+        .example-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: center;
+        }
+
+        .example-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        /* Grid Demo */
+        .grid-demo {
+            display: grid;
+            gap: var(--space-2);
+            padding: var(--space-6);
+            background: var(--paper-stock);
+            border: var(--rule-weight-light) solid var(--ink);
+            margin: var(--space-6) 0;
+        }
+
+        .grid-demo-12 {
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .grid-col {
+            background: var(--ink);
+            height: 48px;
+        }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin: var(--space-6) 0;
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .spacing-label {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+            min-width: 100px;
+        }
+
+        .spacing-bar {
+            height: 12px;
+            background: var(--ink);
+        }
+
+        /* ============================================
+           UI COMPONENTS
+           ============================================ */
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            line-height: 1;
+            text-decoration: none;
+            border: var(--rule-weight-light) solid var(--ink);
+            padding: var(--space-3) var(--space-6);
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .btn-primary:hover {
+            background: var(--ink-secondary);
+        }
+
+        .btn-secondary {
+            background: var(--paper-bright);
+            color: var(--ink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--paper-stock);
+        }
+
+        .btn-lg {
+            font-size: var(--text-base);
+            padding: var(--space-4) var(--space-8);
+            border-width: var(--rule-weight-medium);
+        }
+
+        /* Inputs */
+        .input {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            color: var(--ink);
+            background: var(--paper-bright);
+            border: var(--rule-weight-light) solid var(--ink);
+            padding: var(--space-3) var(--space-4);
+            width: 100%;
+            max-width: 24rem;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        .input::placeholder {
+            color: var(--ink-muted);
+        }
+
+        .input-error {
+            border-color: var(--signal-error);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-label {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .form-hint {
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+        }
+
+        .form-error {
+            font-size: var(--text-xs);
+            font-weight: 500;
+            color: var(--signal-error);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--paper-bright);
+            border: var(--rule-weight-light) solid var(--ink);
+        }
+
+        .card-body {
+            padding: var(--space-6);
+        }
+
+        .card-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-sm);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: var(--space-3);
+        }
+
+        .card-description {
+            font-size: var(--text-sm);
+            color: var(--ink-secondary);
+            line-height: 1.6;
+        }
+
+        .card:hover {
+            box-shadow: 4px 4px 0 var(--ink);
+        }
+
+        /* Alerts */
+        .alert {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-4) var(--space-6);
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            border: var(--rule-weight-light) solid;
+            border-left-width: var(--rule-weight-black);
+        }
+
+        .alert-error {
+            background: #FDF2F2;
+            border-color: var(--signal-error);
+            color: var(--signal-error);
+        }
+
+        .alert-success {
+            background: #F0FDF4;
+            border-color: var(--signal-success);
+            color: var(--signal-success);
+        }
+
+        .alert-caution {
+            background: #FFFBEB;
+            border-color: var(--signal-caution);
+            color: var(--signal-caution);
+        }
+
+        /* Navigation */
+        .nav-example {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            padding: var(--space-4) var(--space-6);
+            background: var(--paper-bright);
+            border: var(--rule-weight-light) solid var(--ink);
+            border-top-width: var(--rule-weight-heavy);
+        }
+
+        .nav-logo {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--text-lg);
+            font-weight: 800;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--ink-secondary);
+            text-decoration: none;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--ink);
+        }
+
+        .nav-link.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+        }
+
+        /* Tables */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--text-sm);
+            border: var(--rule-weight-light) solid var(--ink);
+        }
+
+        .table th {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .table td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: var(--rule-weight-hairline) solid var(--rule-light);
+            color: var(--ink-secondary);
+        }
+
+        .table tbody tr:hover {
+            background: var(--paper-aged);
+        }
+
+        /* Metrics */
+        .metric {
+            padding: var(--space-6);
+            background: var(--paper-bright);
+            border: var(--rule-weight-light) solid var(--ink);
+        }
+
+        .metric-label {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .metric-value {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-lg);
+            font-weight: 800;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .metric-change {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--signal-success);
+            margin-top: var(--space-2);
+        }
+
+        /* Pull Quote */
+        .pullquote {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: var(--display-sm);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--ink);
+            padding: var(--space-8) var(--space-6);
+            border-top: var(--rule-weight-heavy) solid var(--ink);
+            border-bottom: var(--rule-weight-heavy) solid var(--ink);
+            margin: var(--space-8) 0;
+            text-align: center;
+        }
+
+        /* Rule variations */
+        .rule-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .rule-sample {
+            flex: 1;
+            background: var(--ink);
+        }
+
+        .rule-label {
+            font-family: 'SF Mono', monospace;
+            font-size: var(--text-xs);
+            color: var(--ink-tertiary);
+            min-width: 100px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .subsection {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .document {
+                padding: var(--space-12) var(--space-4);
+            }
+
+            .section-header {
+                grid-template-columns: 1fr;
+                gap: var(--space-2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <!-- Masthead -->
+        <header class="masthead">
+            <p class="masthead-kicker">Design System Specification v1.0</p>
+            <h1 class="masthead-title">Editorial<br>Machine.</h1>
+            <div class="masthead-rule"></div>
+            <p class="masthead-subtitle">Type carries authority. Space creates rhythm. Rules define structure.</p>
+        </header>
+
+        <!-- 01. Philosophy -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Philosophy</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Design Logic</h3>
+                    <div class="subsection-content">
+                        <p class="lead">Editorial Machine draws from the confidence of mid-century advertising and the discipline of newspaper design. Headlines command. Body text serves. Rules organize.</p>
+                        <p>This system treats typography as the primary interface element. Display type does the heavy lifting—announcing, persuading, organizing. The supporting elements (color, space, imagery) exist to amplify typographic hierarchy, never to compete with it.</p>
+                        <p>Every component earns its place through function. Decoration without purpose is prohibited.</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Optimizations</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li><strong>Headline confidence</strong> — Display type carries the message; size and weight signal importance</li>
+                            <li><strong>Executive scanning</strong> — Information hierarchy supports quick comprehension</li>
+                            <li><strong>Editorial rhythm</strong> — Consistent vertical spacing creates predictable reading patterns</li>
+                            <li><strong>Rule-based structure</strong> — Horizontal rules replace boxes and backgrounds for organization</li>
+                            <li><strong>Warm authority</strong> — Paper tones add warmth without sacrificing professionalism</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Constraints</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>No rounded corners. Rectangular forms only.</li>
+                            <li>No gradients or shadows beyond functional offset.</li>
+                            <li>Color is structural (rules, ink, paper). Never decorative.</li>
+                            <li>Photography is documentary. No lifestyle imagery.</li>
+                            <li>Animation is state-change only. No aesthetic motion.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. Color Palette -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Color, Pattern & Texture</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Ink System</h3>
+                    <div class="subsection-content">
+                        <p>Ink colors derive from warm black. The primary ink (#1A1612) carries brown undertones that soften against paper without losing authority. Hierarchy is achieved through value, not hue.</p>
+                    </div>
+                </div>
+
+                <div class="swatch-grid">
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #1A1612;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Ink</p>
+                            <p class="swatch-value">#1A1612</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #4A453D;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Ink Secondary</p>
+                            <p class="swatch-value">#4A453D</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #7A746A;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Ink Tertiary</p>
+                            <p class="swatch-value">#7A746A</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #A8A197;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Ink Muted</p>
+                            <p class="swatch-value">#A8A197</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Paper System</h3>
+                    <div class="subsection-content">
+                        <p>Paper colors reference newsprint and book stock. The base paper (#F8F5F0) is warm cream. Aged and stock variants add depth for layering. Bright white is reserved for maximum contrast moments.</p>
+                    </div>
+                </div>
+
+                <div class="swatch-grid">
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #F8F5F0; border: 1px solid #D4CFC5;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Paper</p>
+                            <p class="swatch-value">#F8F5F0</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #F0EBE3; border: 1px solid #D4CFC5;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Paper Aged</p>
+                            <p class="swatch-value">#F0EBE3</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #E8E2D6; border: 1px solid #D4CFC5;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Paper Stock</p>
+                            <p class="swatch-value">#E8E2D6</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #FFFEFA; border: 1px solid #D4CFC5;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Paper Bright</p>
+                            <p class="swatch-value">#FFFEFA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Signal Colors</h3>
+                    <div class="subsection-content">
+                        <p>Signals communicate state. They appear only in feedback contexts. Muted tones maintain editorial restraint while ensuring accessibility.</p>
+                    </div>
+                </div>
+
+                <div class="swatch-grid">
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #9B2C2C;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Error</p>
+                            <p class="swatch-value">#9B2C2C</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #276749;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Success</p>
+                            <p class="swatch-value">#276749</p>
+                        </div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background: #975A16;"></div>
+                        <div class="swatch-info">
+                            <p class="swatch-name">Caution</p>
+                            <p class="swatch-value">#975A16</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Rules & Borders</h3>
+                    <div class="subsection-content">
+                        <p>Horizontal rules replace background colors for organization. Rule weight carries meaning: heavy rules signal major divisions, hairlines separate related items.</p>
+                        <div class="rule-demo">
+                            <div class="rule-item">
+                                <span class="rule-label">Black (6px)</span>
+                                <div class="rule-sample" style="height: 6px;"></div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-label">Heavy (4px)</span>
+                                <div class="rule-sample" style="height: 4px;"></div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-label">Medium (3px)</span>
+                                <div class="rule-sample" style="height: 3px;"></div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-label">Light (2px)</span>
+                                <div class="rule-sample" style="height: 2px;"></div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-label">Hairline (1px)</span>
+                                <div class="rule-sample" style="height: 1px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Typography -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Typography</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Type Families</h3>
+                    <div class="subsection-content">
+                        <p><strong>Display:</strong> Fraunces — A variable serif with optical sizing, high stroke contrast, and soft, rounded details. The "wonky" axis adds subtle personality without compromising legibility. Use at large sizes where its character becomes visible.</p>
+                        <p><strong>Interface:</strong> Inter — A neutral sans-serif optimized for screens. Handles body text, labels, and UI elements. Its job is to stay invisible.</p>
+                    </div>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Display 2XL / Fraunces 900 / Headline</p>
+                    <p class="type-specimen-sample specimen-display" style="font-size: clamp(3rem, 8vw, 5rem);">The Copy Machine.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Display XL / Fraunces 800 / Section Title</p>
+                    <p class="type-specimen-sample specimen-display" style="font-size: clamp(2rem, 5vw, 3.5rem);">Transform your copy.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Display LG / Fraunces 700 / Card Headline</p>
+                    <p class="type-specimen-sample specimen-display" style="font-size: clamp(1.5rem, 3vw, 2.25rem);">Disciplined language wins.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Display SM / Fraunces 500 Italic / Subtitle</p>
+                    <p class="type-specimen-sample" style="font-family: 'Fraunces', Georgia, serif; font-size: 1.5rem; font-weight: 500; font-style: italic; line-height: 1.3;">Constraint-driven rewriting for predictable outcomes.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Body / Inter 400 / Paragraph</p>
+                    <p class="type-specimen-sample" style="font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.75; max-width: 38rem;">Body text uses Inter at 16px with generous line height (1.75). The measure is constrained to 38rem for optimal readability. Paragraphs are separated by the line height value.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Small / Inter 500 / Labels</p>
+                    <p class="type-specimen-sample" style="font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500;">Form labels, table headers, and secondary interface text</p>
+                </div>
+
+                <div class="type-specimen">
+                    <p class="type-specimen-label">Caption / Inter 600 / Metadata</p>
+                    <p class="type-specimen-sample" style="font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary);">Section Labels • Timestamps • Categories</p>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Typography Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li><strong>Measure:</strong> Body text maximum 38rem (≈65 characters)</li>
+                            <li><strong>Line height:</strong> 1.75 for body, 1.0–1.2 for display</li>
+                            <li><strong>Display weight:</strong> 700–900 for headlines. Never use display type at body weight.</li>
+                            <li><strong>Italic use:</strong> Reserved for subtitles, pull quotes, and editorial voice. Never for emphasis.</li>
+                            <li><strong>ALL CAPS:</strong> Labels and metadata only. Requires letter-spacing ≥0.1em.</li>
+                            <li><strong>No underlines</strong> except links. Use weight for text emphasis.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Layout & Spacing -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">04.</span>
+                <h2 class="section-title">Layout & Spacing</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Grid System</h3>
+                    <div class="subsection-content">
+                        <p>12-column grid with responsive column counts. Gutters maintain 1.5rem. Page maximum: 72rem. Content areas use asymmetric layouts when editorial hierarchy benefits.</p>
+                    </div>
+                </div>
+
+                <div class="grid-demo grid-demo-12">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                </div>
+
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Breakpoint</th>
+                            <th>Viewport</th>
+                            <th>Columns</th>
+                            <th>Gutter</th>
+                            <th>Margin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mobile</td>
+                            <td><code>&lt;640px</code></td>
+                            <td>4</td>
+                            <td>1rem</td>
+                            <td>1rem</td>
+                        </tr>
+                        <tr>
+                            <td>Tablet</td>
+                            <td><code>640–1024px</code></td>
+                            <td>8</td>
+                            <td>1.5rem</td>
+                            <td>2rem</td>
+                        </tr>
+                        <tr>
+                            <td>Desktop</td>
+                            <td><code>&gt;1024px</code></td>
+                            <td>12</td>
+                            <td>1.5rem</td>
+                            <td>4rem</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Spacing Scale</h3>
+                    <div class="subsection-content">
+                        <p>4px base unit. Scale jumps at larger values to create clear visual breaks between spacing decisions.</p>
+                        <div class="spacing-scale">
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-1 (4px)</span>
+                                <div class="spacing-bar" style="width: 4px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-2 (8px)</span>
+                                <div class="spacing-bar" style="width: 8px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-4 (16px)</span>
+                                <div class="spacing-bar" style="width: 16px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-6 (24px)</span>
+                                <div class="spacing-bar" style="width: 24px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-8 (32px)</span>
+                                <div class="spacing-bar" style="width: 32px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-12 (48px)</span>
+                                <div class="spacing-bar" style="width: 48px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-16 (64px)</span>
+                                <div class="spacing-bar" style="width: 64px;"></div>
+                            </div>
+                            <div class="spacing-item">
+                                <span class="spacing-label">--space-24 (96px)</span>
+                                <div class="spacing-bar" style="width: 96px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Iconography -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">Iconography</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Icon Style</h3>
+                    <div class="subsection-content">
+                        <p>Icons are functional glyphs, not decorative elements. Stroke-based, 1.5px weight at 24px, squared corners. Icons inherit ink color and never introduce new colors.</p>
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Style</td><td>Outlined, stroke-based</td></tr>
+                                <tr><td>Stroke weight</td><td>1.5px at 24px</td></tr>
+                                <tr><td>Corners</td><td>Square (no radius)</td></tr>
+                                <tr><td>Grid</td><td>24×24px</td></tr>
+                                <tr><td>Sizes</td><td>16px, 20px, 24px</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Icon Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>Icons accompany text labels. Icon-only requires tooltip + aria-label.</li>
+                            <li>Icons inherit current text color. No separate icon colors.</li>
+                            <li>Minimum touch target: 44×44px regardless of icon size.</li>
+                            <li>If the icon doesn't add clarity, remove it.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. Imagery & Media -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">06.</span>
+                <h2 class="section-title">Imagery & Media</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Image Role</h3>
+                    <div class="subsection-content">
+                        <p>Imagery is documentary. It shows the product, demonstrates the interface, or visualizes data. Stock photography and lifestyle imagery are prohibited. If text can communicate the message, imagery is unnecessary.</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Image Treatment</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li><strong>Aspect ratios:</strong> 16:9 (hero), 4:3 (card), 3:2 (editorial), 1:1 (thumbnail)</li>
+                            <li><strong>Border:</strong> 2px solid Ink for all images</li>
+                            <li><strong>Background:</strong> Paper Aged or Paper Stock for product shots</li>
+                            <li><strong>No filters, overlays, or color treatments</strong></li>
+                            <li><strong>Screenshots</strong> include browser chrome or device frame</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. Navigation -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">07.</span>
+                <h2 class="section-title">Navigation</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Navigation Example</h3>
+                    <div class="subsection-content">
+                        <div class="example-container">
+                            <nav class="nav-example">
+                                <a href="#" class="nav-logo">The Copy Machine</a>
+                                <ul class="nav-links">
+                                    <li><a href="#" class="nav-link active">Dashboard</a></li>
+                                    <li><a href="#" class="nav-link">Projects</a></li>
+                                    <li><a href="#" class="nav-link">Documents</a></li>
+                                    <li><a href="#" class="nav-link">Settings</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Navigation Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>Primary navigation: 7 items maximum</li>
+                            <li>Active state: underline (2px, offset 4px)</li>
+                            <li>Logo uses Fraunces 800</li>
+                            <li>Mobile: collapse to hamburger at tablet breakpoint</li>
+                            <li>Dropdowns open on click, not hover. Max depth: 2 levels.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. Inputs -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">08.</span>
+                <h2 class="section-title">Inputs</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Input Examples</h3>
+                    <div class="subsection-content">
+                        <div class="example-container">
+                            <div class="example-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email address</label>
+                                    <input type="email" class="input" placeholder="you@company.com">
+                                    <span class="form-hint">We'll never share your email.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company name</label>
+                                    <input type="text" class="input input-error" value="A">
+                                    <span class="form-error">→ Company name must be at least 2 characters.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Input Specs</h3>
+                    <div class="subsection-content">
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Height</td><td>44px</td></tr>
+                                <tr><td>Padding</td><td>12px 16px</td></tr>
+                                <tr><td>Border</td><td>2px solid Ink</td></tr>
+                                <tr><td>Border radius</td><td>0 (square)</td></tr>
+                                <tr><td>Focus</td><td>3px offset shadow</td></tr>
+                                <tr><td>Error</td><td>Border: Signal Error</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. Actions -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">09.</span>
+                <h2 class="section-title">Actions</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Button Hierarchy</h3>
+                    <div class="subsection-content">
+                        <div class="example-container">
+                            <p class="example-label">Standard</p>
+                            <div class="example-row">
+                                <button class="btn btn-primary">Primary Action</button>
+                                <button class="btn btn-secondary">Secondary</button>
+                            </div>
+                        </div>
+                        <div class="example-container">
+                            <p class="example-label">Large</p>
+                            <div class="example-row">
+                                <button class="btn btn-primary btn-lg">Get Started</button>
+                                <button class="btn btn-secondary btn-lg">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Button Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>One primary button per view</li>
+                            <li>Button text is verb-first: "Save changes" not "Changes"</li>
+                            <li>Minimum width: 120px. No full-width buttons unless in narrow containers.</li>
+                            <li>Border: 2px (standard), 3px (large)</li>
+                            <li>No rounded corners. Square edges only.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Feedback -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">10.</span>
+                <h2 class="section-title">Feedback</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Alert Examples</h3>
+                    <div class="subsection-content">
+                        <div class="example-container">
+                            <div class="example-stack">
+                                <div class="alert alert-success">Changes saved successfully.</div>
+                                <div class="alert alert-error">Unable to save. Check your connection and try again.</div>
+                                <div class="alert alert-caution">Your session will expire in 5 minutes.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Feedback Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>Messages are specific: "Document saved" not "Success"</li>
+                            <li>Errors don't blame: "Enter a valid email" not "You entered an invalid email"</li>
+                            <li>Left border (6px) signals severity</li>
+                            <li>Success auto-dismisses after 5s. Errors persist until resolved.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Content Blocks -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">11.</span>
+                <h2 class="section-title">Content Blocks</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Card Example</h3>
+                    <div class="subsection-content">
+                        <div class="example-container" style="background: var(--paper);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Document Title</h3>
+                                        <p class="card-description">A brief description of the document contents and its purpose. Limited to 2-3 lines for scannability.</p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Project Name</h3>
+                                        <p class="card-description">Project status and activity summary. Key metrics appear inline with description text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Pull Quote</h3>
+                    <div class="subsection-content">
+                        <div class="pullquote">
+                            "Type carries authority. Space creates rhythm. Rules define structure."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Data Display -->
+        <section class="section">
+            <header class="section-header">
+                <span class="section-number">12.</span>
+                <h2 class="section-title">Data Display</h2>
+            </header>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3 class="subsection-title">Table Example</h3>
+                    <div class="subsection-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Status</th>
+                                    <th>Modified</th>
+                                    <th>Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Q4 Financial Report</td>
+                                    <td>Published</td>
+                                    <td>Jan 15, 2025</td>
+                                    <td>J. Smith</td>
+                                </tr>
+                                <tr>
+                                    <td>Marketing Strategy</td>
+                                    <td>Draft</td>
+                                    <td>Jan 12, 2025</td>
+                                    <td>A. Johnson</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Roadmap</td>
+                                    <td>Review</td>
+                                    <td>Jan 10, 2025</td>
+                                    <td>M. Williams</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Metrics Example</h3>
+                    <div class="subsection-content">
+                        <div class="example-container" style="background: var(--paper);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+                                <div class="metric">
+                                    <p class="metric-label">Documents</p>
+                                    <p class="metric-value">2,847</p>
+                                    <p class="metric-change">↑ 12% from last month</p>
+                                </div>
+                                <div class="metric">
+                                    <p class="metric-label">Active Users</p>
+                                    <p class="metric-value">1,204</p>
+                                    <p class="metric-change">↑ 8% from last month</p>
+                                </div>
+                                <div class="metric">
+                                    <p class="metric-label">Completion</p>
+                                    <p class="metric-value">94%</p>
+                                    <p class="metric-change">↑ 3% from last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Data Rules</h3>
+                    <div class="subsection-content">
+                        <ul class="rules">
+                            <li>Table headers use Fraunces 600 on Ink background</li>
+                            <li>Numbers align right. Text aligns left.</li>
+                            <li>Metric values use Fraunces 800 at Display LG size</li>
+                            <li>Hover states use Paper Aged background</li>
+                            <li>Tables have 2px Ink border. Internal rules are 1px.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
