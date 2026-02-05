@@ -55,6 +55,9 @@ Ask: **"What vibe fits your brand?"**
 | Weird and unhinged | `tones/weird-unhinged.md` |
 | Warm and mission-driven | `tones/warm-mission-driven.md` |
 | Witty and self-aware | `tones/witty-self-aware.md` |
+| Friendly and helpful | `tones/friendly-helpful.md` |
+| Playful and human | `tones/playful-human.md` |
+| Technical and precise | `tones/technical-precise.md` |
 
 ### Question 2 — "What should your copy do?"
 
@@ -386,6 +389,9 @@ When the user makes their selections, load these files:
 - `tones/weird-unhinged.md` — Liquid Death voice
 - `tones/warm-mission-driven.md` — Patagonia voice
 - `tones/witty-self-aware.md` — Oatly voice
+- `tones/friendly-helpful.md` — Mailchimp voice
+- `tones/playful-human.md` — Innocent voice
+- `tones/technical-precise.md` — Stripe voice
 
 **Channels:**
 - `channels/landing-page.md` — Scroll-based, 500-1500 words
@@ -406,6 +412,9 @@ When the user makes their selections, load these files:
 - Weird and unhinged
 - Warm and mission-driven
 - Witty and self-aware
+- Friendly and helpful
+- Playful and human
+- Technical and precise
 
 **User:** Witty and self-aware
 
@@ -446,6 +455,9 @@ What vibe fits your brand?
 - Weird and unhinged
 - Warm and mission-driven
 - Witty and self-aware
+- Friendly and helpful
+- Playful and human
+- Technical and precise
 
 **User:** Clean and confident
 
