@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refund Policy — The Copy Machine</title>
+    <title>Contact — The Copy Machine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -96,21 +96,14 @@
             margin-bottom: 1rem;
         }
 
-        .page-meta {
-            font-size: 0.875rem;
-            color: var(--ink-tertiary);
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--ink-secondary);
+            max-width: 36ch;
         }
 
         .content {
             padding-bottom: 4rem;
-        }
-
-        .content h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 2.5rem 0 1rem;
-            color: var(--ink);
         }
 
         .content p {
@@ -119,29 +112,28 @@
             line-height: 1.75;
         }
 
-        .content ul {
-            margin: 0 0 1rem 1.5rem;
-            color: var(--ink-secondary);
+        /* Form Container */
+        .form-container {
+            background: var(--paper-bright);
+            border: 2px solid var(--ink);
+            margin: 2rem 0;
+            min-height: 500px;
         }
 
-        .content li {
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
+        .form-container iframe {
+            width: 100%;
+            border: none;
         }
 
-        .content strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        .callout {
+        /* Response Times */
+        .response-info {
             background: var(--paper-aged);
             border: 2px solid var(--ink);
             padding: 1.5rem 2rem;
             margin: 2rem 0;
         }
 
-        .callout-title {
+        .response-info-title {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.125rem;
             font-weight: 700;
@@ -149,7 +141,12 @@
             color: var(--ink);
         }
 
-        .callout p {
+        .response-info p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .response-info p:last-child {
             margin-bottom: 0;
         }
 
@@ -191,65 +188,55 @@
 <body>
     <header class="header">
         <div class="header-inner">
-            <a href="../index.html" class="logo">The Copy Machine</a>
-            <a href="../index.html" class="back-link">&larr; Back to Home</a>
+            <a href="/" class="logo">The Copy Machine</a>
+            <a href="/" class="back-link">&larr; Back to Home</a>
         </div>
     </header>
 
     <main class="container">
         <div class="page-header">
-            <h1 class="page-title">Refund Policy</h1>
-            <p class="page-meta">Last updated: February 2025</p>
+            <h1 class="page-title">Contact</h1>
+            <p class="page-subtitle">Questions, support, or just want to say hi.</p>
         </div>
 
         <div class="content">
-            <div class="callout">
-                <p class="callout-title">The Short Version</p>
-                <p>All sales of The Copy Machine are final. We do not offer refunds.</p>
+            <p>Have a question about The Copy Machine? Need help with something? Use the form below and we'll get back to you.</p>
+
+            <div class="form-container">
+                <!-- Replace FORM_ID with your actual Tally form ID -->
+                <iframe
+                    data-tally-src="https://tally.so/embed/FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="500"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Contact Form">
+                </iframe>
+                <script>
+                    var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s)}
+                </script>
             </div>
 
-            <h2>Why No Refunds?</h2>
-            <p>The Copy Machine is a digital product — a Claude Skill consisting of text-based instruction files. Once you receive the files, you have immediate, permanent access to the complete product. There's no way to "return" digital knowledge.</p>
+            <div class="response-info">
+                <p class="response-info-title">Response Times</p>
+                <p><strong>General questions:</strong> Within 48 hours</p>
+                <p><strong>Purchase/delivery issues:</strong> Within 24 hours</p>
+                <p><strong>Weekends/holidays:</strong> Next business day</p>
+            </div>
 
-            <p>Unlike software subscriptions, this is a one-time purchase. You're not paying for ongoing access that can be revoked — you're buying a set of copywriting frameworks, tone guides, and instructions that you keep forever.</p>
-
-            <h2>What You Get Before Purchase</h2>
-            <p>We want you to buy with confidence. Before purchasing, you have access to:</p>
-            <ul>
-                <li><strong>Full product description</strong> on our homepage explaining exactly what The Copy Machine does</li>
-                <li><strong>Before/after examples</strong> showing the difference the skill makes</li>
-                <li><strong>Clear explanation</strong> of how the skill works (framework + tone + channel)</li>
-                <li><strong>This refund policy</strong> — you know what you're agreeing to</li>
-            </ul>
-
-            <h2>Exceptions</h2>
-            <p>We may consider exceptions in rare cases:</p>
-            <ul>
-                <li><strong>Duplicate purchase:</strong> If you accidentally bought twice, contact us and we'll refund the duplicate</li>
-                <li><strong>Technical delivery failure:</strong> If our system fails to deliver the product and we can't resolve it, we'll refund you</li>
-            </ul>
-            <p>These situations require proof (order confirmations, screenshots of errors, etc.). Contact us through our <a href="contact.html">Contact page</a> with details.</p>
-
-            <h2>Before You Buy</h2>
-            <p>Make sure The Copy Machine is right for you:</p>
-            <ul>
-                <li><strong>You need Claude access.</strong> This is a Claude Skill — it runs inside Claude. You need an active Claude account (Claude.ai or API access).</li>
-                <li><strong>It's a writing tool, not magic.</strong> The skill applies copywriting frameworks to your inputs. You still need to provide product context. Results depend on what you put in.</li>
-                <li><strong>It's for copy, not code.</strong> This skill writes landing pages, emails, ads, and sales pages. It doesn't write software.</li>
-            </ul>
-
-            <h2>Questions?</h2>
-            <p>Not sure if The Copy Machine is right for your use case? <a href="contact.html">Contact us</a> before purchasing. We'd rather answer questions upfront than have you buy something that doesn't fit your needs.</p>
+            <p>For purchase-related inquiries, please include your order number or the email address you used to purchase.</p>
         </div>
     </main>
 
     <footer class="footer">
         <p>The Copy Machine</p>
         <div class="footer-links">
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
-            <a href="refund.html">Refunds</a>
-            <a href="contact.html">Contact</a>
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/refund/">Refunds</a>
+            <a href="/contact/">Contact</a>
         </div>
     </footer>
 </body>
